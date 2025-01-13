@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../globals.css";
+import Header from "@/components/shared/Header";
 
 const montserrat = localFont({
   src: [
@@ -76,8 +77,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${bricolage.variable} ${montserrat.variable} ${poppins.variable}`}
+        className={`${bricolage.variable} ${montserrat.variable} ${poppins.variable} bg-background`}
       >
+        <Header/>
         {children}
       </body>
     </html>
