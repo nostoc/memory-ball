@@ -1,11 +1,13 @@
 import Image from "next/image";
 import React from "react";
 import Icon from "../../public/icon.png";
-import Link from "next/link";
+//import Link from "next/link";
+import SignIn from "../sign-in";
 
 const Header = () => {
   return (
-    <div className="container mx-auto bg-background flex-1 flex justify-between items-center">
+    <header className="bg-background flex justify-between items-center shadow-md w-full py-2">
+    <div className="container mx-auto flex-1 flex justify-between items-center ">
       <div className="flex items-center flex-1 py-4 text-white">
         <Image src={Icon} alt="memory ball logo" width={40} height={40} />
         <p className="font-bricolage font-bold text-[20px] borde">
@@ -13,13 +15,12 @@ const Header = () => {
         </p>
       </div>
       <div>
-        <Link href="#">
-          <button className="btn btn-ghost font-bricolage text-black text-[20px] bg-button  hover:bg-background hover:text-white hover:border-2 hover:border-black">
-            Sign Up
-          </button>
-        </Link>
+       
+          <SignIn/>
+      
       </div>
-    </div>
+      </div>
+    </header>
   );
 };
 
