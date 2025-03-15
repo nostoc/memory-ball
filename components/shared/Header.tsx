@@ -1,8 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import Icon from "../../public/icon.png";
+
 //import Link from "next/link";
-import SignIn from "../sign-in";
+
 
 const Header = () => {
   return (
@@ -15,13 +16,12 @@ const Header = () => {
         </p>
       </div>
       <div>
-       
-          <SignIn/>
-      
-      </div>
+        
+          </div>
       </div>
     </header>
   );
 };
 
 export default Header;
+
