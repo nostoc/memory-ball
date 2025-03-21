@@ -12,7 +12,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="mb-16">
       <AuthForm type="login" onSubmit={handleLogin} error={state.error} />
     </div>
   );

@@ -19,7 +19,7 @@ export default function Register() {
   };
 
   return (
-    <div>
+    <div className="mb-16">
       <AuthForm type="register" onSubmit={handleRegister} error={state.error} />
     </div>
   );

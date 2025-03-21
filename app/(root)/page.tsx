@@ -7,6 +7,7 @@ const page = () => {
     <div>
       <Intro />
       <GetStarted />
+      
     </div>
   );
 }
