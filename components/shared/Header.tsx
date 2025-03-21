@@ -6,6 +6,7 @@ import Link from "next/link";
 //import Link from "next/link";
 
 const Header = () => {
+  
   return (
     <header className="bg-background flex justify-between items-center shadow-md w-full py-2">
       <div className="container mx-auto flex-1 flex justify-between items-center ">
@@ -16,6 +17,7 @@ const Header = () => {
           </p>
         </div>
         <div>
+          
           <Link href="/auth/login">
             <button className="bg-oceanBlue text-white font-bold px-4 py-2 rounded-md">
               Login
@@ -26,5 +28,4 @@ const Header = () => {
     </header>
   );
 };
-
 export default Header;

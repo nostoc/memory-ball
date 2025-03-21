@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useAuth } from "../../../../hooks/useAuth";
 import ProtectedRoute from "../../../../components/ProtectedRoute";
+import Link from "next/link";
 
 export default function Profile() {
   const { state, loadUser } = useAuth();
@@ -34,7 +35,7 @@ export default function Profile() {
                 <p className="text-sm text-gray-500">{state.user.email}</p>
               </div>
             </div>
-
+            <Link href="/decks/decklist">decklist</Link>
           </div>
         )}
       </div>
