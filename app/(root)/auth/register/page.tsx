@@ -2,7 +2,10 @@
 
 import AuthForm from "../../../../components/AuthForm";
 import { useAuth } from "../../../../hooks/useAuth";
-import { RegisterCredentials, LoginCredentials } from "../../../../types";
+import {
+  RegisterCredentials,
+  LoginCredentials,
+} from "../../../../types/authTypes";
 
 export default function Register() {
   const { register, state } = useAuth();

@@ -2,7 +2,7 @@
 
 import AuthForm from "../../../../components/AuthForm";
 import { useAuth } from "../../../../hooks/useAuth";
-import { LoginCredentials } from "../../../../types";
+import { LoginCredentials } from "../../../../types/authTypes";
 
 export default function Login() {
   const { login, state } = useAuth();

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { LoginCredentials, RegisterCredentials } from "../types";
+import { LoginCredentials, RegisterCredentials } from "../types/authTypes";
 
 interface AuthFormProps {
   type: "login" | "register";
