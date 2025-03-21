@@ -104,17 +104,43 @@ const DeckForm: React.FC<DeckFormProps> = ({ deckId }) => {
     }
   };
 
-  if (loading && deckId) return <div>Loading deck data...</div>;
+  if (loading && deckId)
+    return (
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
 
   return (
-    <div>
-      <h1>{deckId ? "Edit Deck" : "Create New Deck"}</h1>
+    <div className="max-w-3xl mx-auto px-4 py-8">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-800">
+          {deckId ? "Edit Deck" : "Create New Deck"}
+        </h1>
+        <p className="text-gray-600 mt-2">
+          {deckId
+            ? "Update your deck information"
+            : "Create a new deck to organize your flashcards"}
+        </p>
+      </div>
 
-      {error && <div>{error}</div>}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-md mb-6">
+          {error}
+        </div>
+      )}
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title</label>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded-lg p-6 border border-gray-200"
+      >
+        <div className="mb-5">
+          <label
+            htmlFor="title"
+            className="block text-gray-700 font-medium mb-2"
+          >
+            Title
+          </label>
           <input
             type="text"
             id="title"
@@ -122,34 +148,53 @@ const DeckForm: React.FC<DeckFormProps> = ({ deckId }) => {
             value={formData.title}
             onChange={handleChange}
             required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Enter deck title"
           />
         </div>
 
-        <div>
-          <label htmlFor="description">Description</label>
+        <div className="mb-5">
+          <label
+            htmlFor="description"
+            className="block text-gray-700 font-medium mb-2"
+          >
+            Description
+          </label>
           <textarea
             id="description"
             name="description"
             value={formData.description}
             onChange={handleChange}
+            rows={4}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Describe your deck (optional)"
           />
         </div>
 
-        <div>
-          <label htmlFor="isPublic">
+        <div className="mb-5">
+          <label className="flex items-center cursor-pointer">
             <input
               type="checkbox"
               id="isPublic"
               name="isPublic"
               checked={formData.isPublic}
               onChange={handleChange}
+              className="h-5 w-5 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
             />
-            Make deck public
+            <span className="ml-2 text-gray-700">Make deck public</span>
           </label>
+          <p className="text-sm text-gray-500 mt-1 ml-7">
+            Public decks can be viewed by other users
+          </p>
         </div>
 
-        <div>
-          <label htmlFor="tags">Tags (comma separated)</label>
+        <div className="mb-6">
+          <label
+            htmlFor="tags"
+            className="block text-gray-700 font-medium mb-2"
+          >
+            Tags (comma separated)
+          </label>
           <input
             type="text"
             id="tags"
@@ -157,15 +202,39 @@ const DeckForm: React.FC<DeckFormProps> = ({ deckId }) => {
             value={formData.tags?.join(", ")}
             onChange={handleTagsChange}
             placeholder="e.g. history, science, math"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
+          <p className="text-sm text-gray-500 mt-1">
+            Tags help organize and find your decks
+          </p>
         </div>
 
-        <div>
-          <button type="submit" disabled={loading}>
-            {loading ? "Saving..." : deckId ? "Update Deck" : "Create Deck"}
-          </button>
-          <button type="button" onClick={() => router.push("/decks")}>
+        <div className="flex justify-end space-x-4 pt-4 border-t border-gray-200">
+          <button
+            type="button"
+            onClick={() => router.push("/decks")}
+            className="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+          >
             Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors 
+                       flex items-center justify-center ${
+                         loading ? "opacity-70 cursor-not-allowed" : ""
+                       }`}
+          >
+            {loading ? (
+              <>
+                <span className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white mr-2"></span>
+                Saving...
+              </>
+            ) : deckId ? (
+              "Update Deck"
+            ) : (
+              "Create Deck"
+            )}
           </button>
         </div>
       </form>
