@@ -16,6 +16,7 @@ export default {
         background: "#2E4057",
         title: "#333333",
         button: "#28AFB0",
+        oceanBlue: "#2CB7BE",
       },
       fontFamily: {
         bricolage: ["var(--font-bricolage)"],

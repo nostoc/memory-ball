@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../globals.css";
 import Header from "@/components/shared/Header";
+import { AuthProvider } from "@/context/AuthContext";
+import Footer from "@/components/shared/Footer";
 
 const montserrat = localFont({
   src: [
@@ -79,8 +81,12 @@ export default function RootLayout({
       <body
         className={`${bricolage.variable} ${montserrat.variable} ${poppins.variable} bg-background`}
       >
+        <AuthProvider>
         <Header/>
-        {children}
+          {children}
+          <Footer/>
+          </AuthProvider>
+          
       </body>
     </html>
   );

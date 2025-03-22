@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}
+
+/* Add/update these in globals.css */
+.card-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.card {
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card-front {
+    transform: rotateY(0deg);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}

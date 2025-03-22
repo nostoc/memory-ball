@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import StudyingCuate from "../../public/images/Studying-cuate.png";
+import StudyingCuate from "../../public/images/Studying-pana.png";
 import { TiTick } from "react-icons/ti";
 
 const Intro = () => {
