@@ -189,22 +189,9 @@ const DeckDetail: React.FC<DeckDetailProps> = ({ deckId }) => {
         <div className="border-t border-gray-200 px-6 py-4 bg-gray-50 flex flex-col sm:flex-row gap-3">
           <button
             onClick={handleStudyDeck}
-            className={`flex-1 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors
-                      flex items-center justify-center ${
-                        stats?.cardCount === 0
-                          ? "opacity-50 cursor-not-allowed"
-                          : ""
-                      }`}
             disabled={stats?.cardCount === 0}
+            className="button-primary"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-            </svg>
             Study Deck
           </button>
           <button
