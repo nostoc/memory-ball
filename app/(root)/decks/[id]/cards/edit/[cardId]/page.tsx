@@ -1,6 +1,6 @@
 "use client";
-import CardForm from "../../../../../../components/card/cardForm";
-import ProtectedRoute from "../../../../../../components/ProtectedRoute";
+import CardForm from "../../../../../../../components/card/cardForm";
+import ProtectedRoute from "../../../../../../../components/ProtectedRoute";
 
 export default function EditCardPage({
   params,
