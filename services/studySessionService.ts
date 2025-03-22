@@ -52,3 +52,17 @@ export const getSessionDetails = async (sessionId: string) => {
   const response = await api.get(`/v1/sessions/${sessionId}`);
   return response.data;
 };
+
+
+// Get all sessions for a specific user
+export const getAllUserSessions = async () => {
+  const response = await api.get(`/v1/sessions/user/all`);
+  return response.data;
+};
+
+
+// Get due cards for a deck (cards that are due for review)
+export const getDueCards = async (deckId: string) => {
+  const response = await api.get(`/v1/decks/${deckId}/cards/due`);
+  return response.data;
+};

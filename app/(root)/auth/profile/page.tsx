@@ -36,7 +36,9 @@ export default function Profile() {
               </div>
             </div>
             <Link href="/decks/decklist">decklist</Link>
+            <Link href="/stats">stats</Link>
           </div>
+          
         )}
       </div>
     </ProtectedRoute>
