@@ -8,7 +8,8 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const { token } = await login(email, password);
+      const userData = { email, password };
+      const { token } = await login(userData);
       localStorage.setItem("token", token);
       alert("Login successful");
     } catch (err) {

@@ -2,7 +2,10 @@
 
 import AuthForm from "../../../../components/AuthForm";
 import { useAuth } from "../../../../hooks/useAuth";
-import { RegisterCredentials, LoginCredentials } from "../../../../types";
+import {
+  RegisterCredentials,
+  LoginCredentials,
+} from "../../../../types/authTypes";
 
 export default function Register() {
   const { register, state } = useAuth();
@@ -19,7 +22,7 @@ export default function Register() {
   };
 
   return (
-    <div>
+    <div className="mb-16">
       <AuthForm type="register" onSubmit={handleRegister} error={state.error} />
     </div>
   );

@@ -1,17 +1,29 @@
-'use client'
-import React, { createContext, useReducer, useEffect, ReactNode, JSX } from 'react';
-import { AuthState, LoginCredentials, RegisterCredentials } from '../types';
-import * as authService from '../services/authService';
-import { saveToken, getToken, removeToken } from '../utils/tokenUtils';
-
+"use client";
+import React, {
+  createContext,
+  useReducer,
+  useEffect,
+  ReactNode,
+  JSX,
+} from "react";
+import {
+  AuthState,
+  LoginCredentials,
+  RegisterCredentials,
+} from "../types/authTypes";
+import * as authService from "../services/authService";
+import { saveToken, getToken, removeToken } from "../utils/tokenUtils";
 
 // Define action types
 type AuthAction =
-  | { type: 'REGISTER_REQUEST' | 'LOGIN_REQUEST' | 'USER_LOADED_REQUEST' }
-  | { type: 'REGISTER_SUCCESS' | 'LOGIN_SUCCESS'; payload: AuthState }
-  | { type: 'USER_LOADED_SUCCESS'; payload: AuthState }
-  | { type: 'REGISTER_FAIL' | 'LOGIN_FAIL' | 'USER_LOADED_FAIL'; payload: string }
-  | { type: 'LOGOUT' };
+  | { type: "REGISTER_REQUEST" | "LOGIN_REQUEST" | "USER_LOADED_REQUEST" }
+  | { type: "REGISTER_SUCCESS" | "LOGIN_SUCCESS"; payload: AuthState }
+  | { type: "USER_LOADED_SUCCESS"; payload: AuthState }
+  | {
+      type: "REGISTER_FAIL" | "LOGIN_FAIL" | "USER_LOADED_FAIL";
+      payload: string;
+    }
+  | { type: "LOGOUT" };
 
 // Initial state
 const initialState: AuthState = {
@@ -43,32 +55,32 @@ export const AuthContext = createContext<AuthContextType>({
 // Reducer function
 const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
-    case 'REGISTER_REQUEST':
-    case 'LOGIN_REQUEST':
-    case 'USER_LOADED_REQUEST':
+    case "REGISTER_REQUEST":
+    case "LOGIN_REQUEST":
+    case "USER_LOADED_REQUEST":
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case 'REGISTER_SUCCESS':
-    case 'LOGIN_SUCCESS':
+    case "REGISTER_SUCCESS":
+    case "LOGIN_SUCCESS":
       return {
         ...state,
         ...action.payload,
         isAuthenticated: true,
         loading: false,
       };
-    case 'USER_LOADED_SUCCESS':
+    case "USER_LOADED_SUCCESS":
       return {
         ...state,
         ...action.payload,
         isAuthenticated: true,
         loading: false,
       };
-    case 'REGISTER_FAIL':
-    case 'LOGIN_FAIL':
-    case 'USER_LOADED_FAIL':
+    case "REGISTER_FAIL":
+    case "LOGIN_FAIL":
+    case "USER_LOADED_FAIL":
       return {
         ...state,
         user: null,
@@ -77,7 +89,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
         loading: false,
         error: action.payload,
       };
-    case 'LOGOUT':
+    case "LOGOUT":
       return {
         ...state,
         user: null,
@@ -101,48 +113,52 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   // Register user
   const register = async (userData: RegisterCredentials): Promise<void> => {
     try {
-      dispatch({ type: 'REGISTER_REQUEST' });
+      dispatch({ type: "REGISTER_REQUEST" });
       const response = await authService.register(userData);
       saveToken(response.token);
       dispatch({
-        type: 'REGISTER_SUCCESS',
-        payload: { 
+        type: "REGISTER_SUCCESS",
+        payload: {
           user: response.user,
           token: response.token,
           isAuthenticated: true,
           loading: false,
-          error: null
+          error: null,
         },
       });
     } catch (error: Error | unknown) {
       removeToken();
       dispatch({
-        type: 'REGISTER_FAIL',
-        payload: (error as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Registration failed',
+        type: "REGISTER_FAIL",
+        payload:
+          (error as { response?: { data?: { message?: string } } })?.response
+            ?.data?.message || "Registration failed",
       });
     }
   };
   // Login user
   const login = async (userData: LoginCredentials): Promise<void> => {
     try {
-      dispatch({ type: 'LOGIN_REQUEST' });
+      dispatch({ type: "LOGIN_REQUEST" });
       const response = await authService.login(userData);
       saveToken(response.token);
       dispatch({
-        type: 'LOGIN_SUCCESS',
-        payload: { 
+        type: "LOGIN_SUCCESS",
+        payload: {
           user: response.user,
           token: response.token,
           isAuthenticated: true,
           loading: false,
-          error: null
+          error: null,
         },
       });
     } catch (error: Error | unknown) {
       removeToken();
       dispatch({
-        type: 'LOGIN_FAIL',
-        payload: (error as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Login failed',
+        type: "LOGIN_FAIL",
+        payload:
+          (error as { response?: { data?: { message?: string } } })?.response
+            ?.data?.message || "Login failed",
       });
     }
   };
@@ -187,16 +203,16 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   // Logout user
   const logout = (): void => {
     removeToken();
-    dispatch({ type: 'LOGOUT' });
+    dispatch({ type: "LOGOUT" });
   };
 
   // Load user on initial app load if token exists
- useEffect(() => {
-   const token = getToken();
-   if (token && !state.user) {
-     loadUser();
-   }
- }, [state.user]);
+  useEffect(() => {
+    const token = getToken();
+    if (token && !state.user) {
+      loadUser();
+    }
+  }, [state.user]);
 
   return (
     <AuthContext.Provider value={{ state, register, login, logout, loadUser }}>
