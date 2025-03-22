@@ -1,12 +1,12 @@
 "use client";
-import DeckDetail from "../../../components/deck/deckDetail";
+import DeckList from "../../../components/deck/deckList";
 import ProtectedRoute from "../../../components/ProtectedRoute";
 
-export default function ViewDeckPage({ params }: { params: { id: string } }) {
+export default function DecksPage() {
   return (
     <ProtectedRoute>
       <main>
-        <DeckDetail deckId={params.id} />
+        <DeckList />
       </main>
     </ProtectedRoute>
   );
